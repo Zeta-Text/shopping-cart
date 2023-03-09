@@ -24,9 +24,19 @@ function App() {
     }
   ]
 
-  function addToCart() {
-
+  function addToCart(item) {
+    setCart(cart => [...cart, item])
   }
+
+  function remove(target) {
+      const index = cart.map(e => e.title).indexOf(target);
+      console.log(index)
+    
+      const newCart = cart.filter((el, i) => i !== index)
+
+      setCart(newCart)
+    }
+
 
   return (
     <div className='content'>
@@ -42,7 +52,7 @@ function App() {
       <div className='page'>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/pages/Shop" element={<Shop />} />
+        <Route path="/pages/Shop" element={<Shop products={products} addToCart={addToCart} remove={remove} />} />
       </Routes>
       </div>
     </div>
